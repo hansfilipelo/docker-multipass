@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# Note that make install depends on rewriting this line.
+readonly prefix="`dirname $0`"
+
+readonly program_name="$(basename $0)"
+
+print_help() {
+  local prog_name=$1
+  local exit_code=$2
+  local err_msg=$3
+
+  if [ -n "$err_msg" ]; then
+    echo >&2 "$err_msg"
+    echo >&2 ""
+  fi
+
+  echo "Usage: "
+  echo "    $prog_name SUBCOMMAND"
+  echo ""
+  echo "  create           Create a new docker-multipass vm."
+  echo "  purge            Remove a docker-multipass vm."
+  echo "  -h,--help        Print this help text."
+  echo ""
+  echo "For help on each subcommand, use $prog_name SUBCOMMAND --help"
+  echo ""
+  exit $exit_code
+}
+
+command="$1"
+
+if [ "$command" = "create" ]; then
+  "$prefix/lib/docker-multipass/create" "${@:2}"
+elif [ "$command" = "purge" ]; then
+  "$prefix/lib/docker-multipass/purge" "${@:2}"
+elif [ "$command" = "-h" ] || [ "$command" = "--help" ]; then
+  print_help "$program_name" 0 ""
+else
+  print_help "$program_name" 1 "Invalid subcommand $command"
+fi
