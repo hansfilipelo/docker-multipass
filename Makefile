@@ -5,8 +5,11 @@ LIB_DIR ?= $(PREFIX)/lib/docker-multipass
 
 .PHONY: uninstall install purge
 
-install: docker-multipass-config docker-multipass lib/docker-multipass/create \
-	lib/docker-multipass/purge lib/docker-multipass/bootstrap-in-vm.sh lib/docker-multipass/unattended.conf
+install: uninstall docker-multipass-config docker-multipass \
+	lib/docker-multipass/create \
+	lib/docker-multipass/purge lib/docker-multipass/bootstrap-in-vm.sh \
+	lib/docker-multipass/unattended.conf \
+	lib/docker-multipass/background-foreground
 	install -d $(BINARY_DIR)
 	install -d $(LIB_DIR)
 	install $(CURDIR)/docker-multipass $(BINARY_DIR)/docker-multipass
@@ -15,11 +18,14 @@ install: docker-multipass-config docker-multipass lib/docker-multipass/create \
 	install $(CURDIR)/lib/docker-multipass/create $(LIB_DIR)/create
 	install $(CURDIR)/lib/docker-multipass/bootstrap-in-vm.sh $(LIB_DIR)/bootstrap-in-vm.sh
 	install $(CURDIR)/lib/docker-multipass/unattended.conf $(LIB_DIR)/unattended.conf
+	install $(CURDIR)/lib/docker-multipass/background-foreground $(LIB_DIR)/background-foreground
+	ln -s $(LIB_DIR)/background-foreground $(LIB_DIR)/background
+	ln -s $(LIB_DIR)/background-foreground $(LIB_DIR)/foreground
 	install $(CURDIR)/docker-multipass-config $(HOME)/.docker-multipass-conf
 
 uninstall:
 	rm -f $(BINARY_DIR)/docker-multipass
-	rm -f $(LIB_DIR)
+	rm -rf $(LIB_DIR)
 
 purge-vm:
 	docker-multipass purge

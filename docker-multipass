@@ -33,6 +33,10 @@ if [ "$command" = "create" ]; then
   "$prefix/lib/docker-multipass/create" "${@:2}"
 elif [ "$command" = "purge" ]; then
   "$prefix/lib/docker-multipass/purge" "${@:2}"
+elif [ "$command" = "background" ]; then
+  "$prefix/lib/docker-multipass/background" "${@:2}"
+elif [ "$command" = "foreground" ]; then
+  "$prefix/lib/docker-multipass/foreground" "${@:2}"
 elif [ "$command" = "-h" ] || [ "$command" = "--help" ]; then
   print_help "$program_name" 0 ""
 else
