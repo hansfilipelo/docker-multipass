@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/bash -e
 
 script_dir="$(dirname $0)"
 readonly INVALID_ARGUMENT=1
@@ -20,7 +20,7 @@ print_help() {
     echo >&2 ""
   fi
 
-  echo "docker-multipass create, create a VM for use with docker."
+  echo "docker-multipass $prog_name, create a VM for use with docker."
   echo ""
   echo "Usage: "
   echo "    docker-multipass $prog_name [-n|--name NAME][-c|--cpus N] [-m|--mem xyzwM] [-d|--disk xyG]"
