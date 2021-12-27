@@ -20,10 +20,7 @@ print_help() {
   echo "Usage: "
   echo "    docker-multipass $prog_name [-n|--name NAME]"
   echo ""
-  echo "  -c,--cpus        Integer. Number of cpus provided to the docker VM. [$cpus]"
-  echo "  -d,--disk        Amount of disk provided to the docker VM. [$disk]"
   echo "  -h,--help        Print this help text."
-  echo "  -m,--mem         Amount of memory provided to the docker VM. [$memory]"
   echo "  -n,--name        Name of the docker VM. [$vm_name]"
   echo ""
   exit $exit_code
