@@ -1,78 +1,33 @@
-# Docker with multipass on macOS
+# docker-multipass
+
+This is a small bash script wrapper around [multipass](https://multipass.run/) which spawns a VM with docker inside of it. Intended target platform is macOS. This utility started out as a fork of docker-multipass from [chrisgoffinet](https://githubplus.com/chrisgoffinet/docker-multipass).
 
 ## Prerequisites
 
-```bash
-$ brew install multipass
-```
-
-# Usage
-
-This will create and launch an instance called primary. Multipass by default will mount your `$HOME` directory if the instance is named `primary`.
+docker-multipass needs multipass, docker and make. Easiest way to get them is to use a package manager like homebrew.
 
 ```bash
-$ ./create-and-init.sh
-+ MEM=2048M
-+ CPUS=2
-+ DISK=20G
-+ echo 'Creating and launching instance'
-Creating and launching instance
-+ multipass launch --name primary -c 2 -m 2048M -d 20G --cloud-init cloud-init.yml
-Launched: primary
-Mounted '/Users/chrisgoffinet' into 'primary:Home'
-+ echo 'Mounting /Users/chrisgoffinet into remote instance: primary'
-Mounting /Users/chrisgoffinet into remote instance: primary
-+ multipass mount /Users/chrisgoffinet primary:/Users/chrisgoffinet
-++ multipass info primary
-++ grep IPv4
-++ awk '{split($0,a," "); print a[2]}'
-+ PRIMARY_INSTANCE=192.168.64.13
-+ echo 'Success! in your bash profile add this:'
-Success! in your bash profile add this:
-+ echo 'export DOCKER_HOST=tcp://192.168.64.13:2375'
-export DOCKER_HOST=tcp://192.168.64.13:2375
+$ brew install multipass docker make
 ```
 
-Now that your `DOCKER_HOST` is pointed to your `primary` instance running commands like you normally do should just work as expected.
+## Install
+
+First install with make.
 
 ```bash
-$ docker pull busybox
-Using default tag: latest
-latest: Pulling from library/busybox
-8ba530ca112c: Pull complete
-Digest: sha256:15e927f78df2cc772b70713543d6b651e3cd8370abf86b2ea4644a9fba21107f
-Status: Downloaded newer image for busybox:latest
-docker.io/library/busybox:latest
-$ docker images
-REPOSITORY   TAG       IMAGE ID       CREATED      SIZE
-busybox      latest    cc54699a1d7e   8 days ago   1.41MB
-$ echo 'test 123' > test.txt
-$ docker run --rm -it -v $PWD/test.txt:/test.txt busybox sh
-/ # cat /test.txt
-test 123
-/ #
+PREFIX=/path/to/install/folder make install
 ```
+
+The install script will print an export that can be added to your profile. Add it to profile (.zprofile for macOS default zsh) and then use docker as usual.
 
 ## How do I configure disk, memory, and cpu?
 
-You can configure the variables in the `create-and-init.sh` script.
+You can pass disk, memory, CPU, image and name of VM on the command line to `docker-multipass create` on a per-call basis, but the intended usecase is to only have one docker host which is configured in the file $HOME/.docker-multipass-config. An example configuration can be found below.
 
 ```
-MEM=2048M
-CPUS=2
-DISK=20G
-```
-
-## Can this replace Docker Desktop?
-
-Yes, on macOS you can install `docker` using `brew`, so no need to go and install `Docker Desktop`.
-
-```bash
-$ brew install docker
-```
-
-## How do I shell into the instance?
-
-```bash
-$ multipass shell
+memory=4096M
+cpus=4
+disk=40G
+vm_name=docker-multipass
+image=lts
 ```
