@@ -9,7 +9,9 @@ install: uninstall docker-multipass-config docker-multipass \
 	lib/docker-multipass/create \
 	lib/docker-multipass/purge lib/docker-multipass/bootstrap-in-vm.sh \
 	lib/docker-multipass/unattended.conf \
-	lib/docker-multipass/background-foreground
+	lib/docker-multipass/background-foreground \
+	lib/docker-multipass/start \
+	lib/docker-multipass/stop
 	install -d $(BINARY_DIR)
 	install -d $(LIB_DIR)
 	install $(CURDIR)/docker-multipass $(BINARY_DIR)/docker-multipass
@@ -23,7 +25,8 @@ install: uninstall docker-multipass-config docker-multipass \
 	ln -s $(LIB_DIR)/background-foreground $(LIB_DIR)/foreground
 	install $(CURDIR)/lib/docker-multipass/stop $(LIB_DIR)/stop
 	install $(CURDIR)/lib/docker-multipass/start $(LIB_DIR)/start
-	install $(CURDIR)/docker-multipass-config $(HOME)/.docker-multipass-conf
+	[ -f "$(HOME)/.docker-multipass-conf" ] || \
+		install $(CURDIR)/docker-multipass-config $(HOME)/.docker-multipass-conf
 
 uninstall:
 	rm -f $(BINARY_DIR)/docker-multipass
