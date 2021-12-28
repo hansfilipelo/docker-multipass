@@ -28,7 +28,7 @@ The `create` subcommand will print an export that can be added to your profile. 
 
 ## How do I configure disk, memory, and cpu?
 
-You can pass disk, memory, CPU, image and name of VM on the command line to `docker-multipass create` on a per-call basis, but the intended usecase is to only have one docker host which is configured in the file $HOME/.docker-multipass-config. An example configuration can be found below.
+You can pass disk, memory, CPU, image and name of VM on the command line to `docker-multipass create` on a per-call basis, but the intended usecase is to only have one docker host which is configured in the file `$HOME/.docker-multipass-config`. An example configuration can be found below.
 
 ```
 memory=4096M
