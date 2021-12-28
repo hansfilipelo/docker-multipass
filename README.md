@@ -12,7 +12,7 @@ $ brew install multipass docker make
 
 ## Install
 
-First install with make.
+First install with make. Default install prefix is `/opt/install`.
 
 ```bash
 PREFIX=/path/to/install/folder make install
