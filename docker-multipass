@@ -19,7 +19,12 @@ print_help() {
   echo "    $prog_name SUBCOMMAND"
   echo ""
   echo "  create           Create a new docker-multipass vm."
+  echo "  background       Set the process priority of the multipass VM to"
+  echo "                   run on efficiency cores only for Apple Silicon."
+  echo "  foreground       Unset the background status of the multipass VM."
   echo "  purge            Remove a docker-multipass vm."
+  echo "  start            Start VM. "
+  echo "  stop             Stop VM."
   echo "  -h,--help        Print this help text."
   echo ""
   echo "For help on each subcommand, use $prog_name SUBCOMMAND --help"
@@ -37,6 +42,10 @@ elif [ "$command" = "background" ]; then
   "$prefix/lib/docker-multipass/background" "${@:2}"
 elif [ "$command" = "foreground" ]; then
   "$prefix/lib/docker-multipass/foreground" "${@:2}"
+elif [ "$command" = "stop" ]; then
+  "$prefix/lib/docker-multipass/stop" "${@:2}"
+elif [ "$command" = "start" ]; then
+  "$prefix/lib/docker-multipass/start" "${@:2}"
 elif [ "$command" = "-h" ] || [ "$command" = "--help" ]; then
   print_help "$program_name" 0 ""
 else

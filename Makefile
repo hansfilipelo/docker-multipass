@@ -21,6 +21,8 @@ install: uninstall docker-multipass-config docker-multipass \
 	install $(CURDIR)/lib/docker-multipass/background-foreground $(LIB_DIR)/background-foreground
 	ln -s $(LIB_DIR)/background-foreground $(LIB_DIR)/background
 	ln -s $(LIB_DIR)/background-foreground $(LIB_DIR)/foreground
+	install $(CURDIR)/lib/docker-multipass/stop $(LIB_DIR)/stop
+	install $(CURDIR)/lib/docker-multipass/start $(LIB_DIR)/start
 	install $(CURDIR)/docker-multipass-config $(HOME)/.docker-multipass-conf
 
 uninstall:
