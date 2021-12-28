@@ -18,7 +18,13 @@ First install with make.
 PREFIX=/path/to/install/folder make install
 ```
 
-The install script will print an export that can be added to your profile. Add it to profile (.zprofile for macOS default zsh) and then use docker as usual.
+## Create a VM for use with docker
+
+```
+docker-multipass create  # See -h for help
+```
+
+The `create` subcommand will print an export that can be added to your profile. Add it to profile (.zprofile for macOS default zsh) and then use `docker` as usual.
 
 ## How do I configure disk, memory, and cpu?
 
