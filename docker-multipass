@@ -48,7 +48,7 @@ elif [ "$command" = "stop" ]; then
   "$prefix/lib/docker-multipass/stop" "${@:2}"
 elif [ "$command" = "start" ]; then
   "$prefix/lib/docker-multipass/start" "${@:2}"
-elif [ "$command" = "-h" ] || [ "$command" = "--help" ]; then
+elif [ "$command" = "-h" -o "$command" = "--help" ] ; then
   print_help "$program_name" 0 ""
 else
   print_help "$program_name" 1 "Invalid subcommand $command"
