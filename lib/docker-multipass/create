@@ -10,6 +10,9 @@ disk=40G
 vm_name=docker-multipass
 image=lts
 
+target_system_user=ubuntu
+target_system_home_folder="/home/$target_system_user"
+
 print_help() {
   local prog_name=$1
   local exit_code=$2
@@ -91,9 +94,9 @@ multipass mount ${HOME} $vm_name:${HOME}
 
 multipass transfer "$script_dir/"bootstrap-in-vm.sh $vm_name:bootstrap-in-vm.sh
 multipass transfer "$script_dir/"unattended.conf $vm_name:unattended.conf
-multipass exec $vm_name -- sudo bash bootstrap-in-vm.sh
-multipass exec $vm_name -- rm bootstrap-in-vm.sh
-multipass exec $vm_name -- rm unattended.conf
+multipass exec $vm_name -- sudo bash "$target_system_home_folder/bootstrap-in-vm.sh"
+multipass exec $vm_name -- rm "$target_system_home_folder/bootstrap-in-vm.sh"
+multipass exec $vm_name -- rm "$target_system_home_folder/unattended.conf"
 
 multipass restart $vm_name
 

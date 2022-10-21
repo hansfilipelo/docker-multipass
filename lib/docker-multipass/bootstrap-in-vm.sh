@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+script_dir="$(dirname $0)"
+
 apt update && apt dist-upgrade -y
 
 apt install -y \
@@ -45,4 +47,4 @@ EOF
 systemctl daemon-reload
 systemctl restart docker
 
-cat unattended.conf > /etc/apt/apt.conf.d/50unattended-upgrades
+cat "$script_dir/unattended.conf" > /etc/apt/apt.conf.d/50unattended-upgrades
