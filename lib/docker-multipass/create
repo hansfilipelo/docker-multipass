@@ -23,7 +23,7 @@ print_help() {
   echo "docker-multipass $prog_name, create a VM for use with docker."
   echo ""
   echo "Usage: "
-  echo "    docker-multipass $prog_name [-n|--name NAME][-c|--cpus N] [-m|--mem xyzwM] [-d|--disk xyG]"
+  echo "    docker-multipass $prog_name [-n|--name NAME] [-c|--cpus N] [-m|--mem xyzwM] [-d|--disk xyG]"
   echo ""
   echo "  -c,--cpus        Integer. Number of cpus provided to the docker VM. [$cpus]"
   echo "  -d,--disk        Amount of disk provided to the docker VM. [$disk]"
