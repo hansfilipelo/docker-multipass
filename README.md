@@ -1,6 +1,6 @@
 # docker-multipass
 
-This is a small bash script wrapper around [multipass](https://multipass.run/) which spawns a VM with docker inside of it. Intended target platform is macOS. This utility started out as a fork of docker-multipass from [chrisgoffinet](https://githubplus.com/chrisgoffinet/docker-multipass).
+This is a small bash script wrapper around [multipass](https://multipass.run/) which spawns a VM with docker inside of it. Intended target platform is macOS. This utility started out as a fork of docker-multipass from [chrisgoffinet](https://github.com/chrisgoffinet/docker-multipass).
 
 ## Prerequisites
 
